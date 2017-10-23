@@ -320,7 +320,11 @@ Vector Matrix::Eigenvalues()//find the eigen values and store them in a vector
 }
 Vector Matrix::Root(const Vector& b)//solving linear system of equations. b is actually a vector (mx1 Matrix) 
 {
-	Vector tmp;
+	if (b.rows!=this-> GetRows() || !this->det()==0)
+			throw logic_error("Two matrices should have same rows and cannot be singular")
+	Matrix tmp;                // 可以直接写成vector 吗？
+	tmp = (this->inverse());
+	tmp = tmp*b;
 	return tmp;
 }
 //------------------------------------------------------------------------------------------------
